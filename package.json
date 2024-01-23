@@ -3,15 +3,19 @@
     "express": "^4.18.2",
     "multer": "^1.4.5-lts.1",
     "node": "^21.2.0",
-    "nodemon": "^3.0.3"
+    "nodemon": "^3.0.3",
+    "vite": "^5.0.12"
   },
   "name": "statistical-data-extractor",
   "description": "This project aims at providing statistical insights to the users from the datasets they provide.\r The dataset recieved from the user is analysed by the python scripts at the backend.\r The results of the analysis are sent back to the user.\r The results include the statistical data and graphs describing the dataaset",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "vite"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
 }
