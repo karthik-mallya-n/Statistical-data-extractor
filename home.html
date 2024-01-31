@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="output.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body style="height: 100vh;width: 80vw;">
+    <div class="upper h-3/5 w-full flex justify-center items-center">
+        <div id="excelViewer"
+          class=" bg-neutral-50 hover:bg-amber-100 rounded-xl h-3/4 w-1/2 border-solid  border-blue-300 border-7 border-r-4 ">
+          <p class="h-full flex justify-center items-center font-sans text-lg text-gray-600 italic leading-relaxed">Drag
+            Here</p>
+        </div>
+      </div>
+      <div class="down h-2/5 w-full flex justify-center items-center">
+        <div id="resetButton"
+          class="transition ease-in-out cursor-pointer  bg-blue-900 hover:-translate-y-1 hover:scale-110 hover:bg-purple-900 duration-300 text-white font-bold rounded-md h-2/6 w-3/6 p-4 mx-6 flex justify-center items-center">Reset</div>
+        <div id="openFileExplorer"
+          class="transition ease-in-out cursor-pointer  bg-blue-900 hover:-translate-y-1 hover:scale-110 hover:bg-purple-900 duration-300 text-white font-bold rounded-md h-2/6 w-3/6 p-4 flex justify-center items-center">
+          Choose file
+        </div>
+        <div id="confirm"
+          class="transition ease-in-out cursor-pointer  bg-blue-900 hover:-translate-y-1 hover:scale-110 hover:bg-purple-900 duration-300 text-white font-bold rounded-md mx-6 h-2/6 w-3/6 p-4 flex justify-center items-center">Confirm</div>
+      <div id="down"
+        class=" transition ease-in-out cursor-pointer  bg-blue-900 hover:-translate-y-1 hover:scale-110 hover:bg-purple-900 duration-300 text-white font-bold rounded-md mx-6 h-2/6 w-3/6 p-4 flex justify-center items-center" onclick="alerting()">
+        Download</div>
+      <div id="share"
+        class="  transition ease-in-out cursor-pointer  bg-blue-900 hover:-translate-y-1 hover:scale-110 hover:bg-purple-900 duration-300 text-white font-bold rounded-md mx-6 h-2/6 w-3/6 p-4 flex justify-center items-center" onclick="alerting()">
+        Share</div>
+    </div>
+</body>
+</html>

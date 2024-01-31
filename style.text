@@ -1,0 +1,71 @@
+.navi:hover a{
+    color: rgb(236, 191, 191);
+    font-size :18px;
+}
+.navi.active  {
+  background-color: #1e3a8a; /* Replace with your desired active color */
+}
+
+#tableContainer {
+    height: 8rem;
+    width: 100%;
+    overflow: auto;
+  }
+
+  #tableContainer::-webkit-scrollbar {
+    width: 12px;
+    padding: -4px;
+  }
+
+  #tableContainer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    padding: -4px;
+  }
+
+  #tableContainer::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 6px;
+    border: 3px solid #f1f1f1;
+  }
+
+  #tableContainer::-webkit-scrollbar-corner {
+    background: #f1f1f1;
+  }
+
+  #excelViewer{
+    display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      border: 2px dashed #ccc;
+
+  }
+  
+  #fileInfo {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  #resetButton {
+    margin-left: 10px;
+    cursor: pointer;
+    
+  }
+
+  @keyframes tans {
+    from{
+        transform: translateX(0px);
+    }
+
+    to{
+        transform: translateX(-50px);
+    }
+
+  }
+
+  .trans{
+    animation: tans 1.5s ease-in-ease-out ;
+    animation-fill-mode: forwards;
+}
