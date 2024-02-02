@@ -1,3 +1,5 @@
+<!--
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,4 +34,122 @@
         Share</div>
     </div>
 </body>
+</html>
+
+
+
+-->
+
+<!--
+
+<form id="fileUploadForm" enctype="multipart/form-data">
+      <input  type="file" name="csvFile" accept=".csv" />
+      <button type="button" onclick="uploadAndGetData()">Extract</button>
+      <button type="button" onclick="resetForm()">Reset</button>
+    </form>
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="output.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body style="height: 100vh; width: 80vw">
+    <div class="upper h-3/5 w-full flex justify-center items-center">
+      <div id="excelViewer" class="custom-box">
+        <p class="custom-text">Drag Here</p>
+      </div>
+    </div>
+
+    <form id="fileUploadForm" enctype="multipart/form-data" class="custom-form">
+      <label id="fileContainer" for="fileInput">
+        <span id="customButtonText" class="custom-button">Choose File</span>
+        <input
+          type="file"
+          id="fileInput"
+          name="csvFile"
+          accept=".csv"
+          class="file-input hidden"
+        />
+      </label>
+      <button type="button" class="custom-button" onclick="uploadAndGetData()">
+        Extract
+      </button>
+      <button type="button" class="custom-button" onclick="resetForm()">
+        Reset
+      </button>
+    </form>
+
+    <div id="dataContainer"></div>
+
+    <script>
+      async function uploadAndGetData() {
+        const form = document.getElementById("fileUploadForm");
+        const formData = new FormData(form);
+        try {
+          const request = await fetch("http://localhost:5173/upload", {
+            method: "POST",
+            body: formData,
+          });
+          const message = await request.text();
+          console.log(message);
+        } catch (err) {
+          console.error(err);
+        }
+        try {
+          const response = await fetch("http://localhost:5173/getData");
+          const data = await response.json();
+
+          // Convert the Buffer data to a string using TextDecoder
+          const textDecoder = new TextDecoder("utf-8");
+          const decodedData = textDecoder.decode(
+            new Uint8Array(data.output.data)
+          );
+
+          //prompt message
+          //add 2 text fields
+
+          // Update the content in the 'dataContainer' div
+          const dataContainer = document.getElementById("dataContainer");
+          dataContainer.innerHTML = `<pre>${decodedData}</pre>`;
+        } catch (err) {
+          console.error(err);
+        }
+      }
+
+      async function resetForm() {
+        const fileInput =
+          document.getElementById("fileUploadForm").elements.csvFile;
+        const fullPath = fileInput.value;
+        const fileName = fullPath.split("\\").pop();
+        const form = document.getElementById("fileUploadForm");
+        form.reset();
+
+        const dataContainer = document.getElementById("dataContainer");
+        dataContainer.innerHTML = "";
+        try {
+          const response = await fetch(
+            `http://localhost:5173/reset/${encodeURIComponent(fileName)}`
+          );
+
+          if (!response.ok) {
+            console.error(`Error resetting file: ${response.statusText}`);
+            return;
+          }
+
+          const reply = await response.text();
+          console.log(reply);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+
+      window.addEventListener("beforeunload", resetForm);
+    </script>
+  </body>
 </html>

@@ -1,12 +1,13 @@
-<!DOCTYPE html>
+<!--
+  <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="output.css">
-  <link rel="stylesheet" href="style.css">
-  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="output.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>prototype</title>
   <script src="script.js"></script>
 </head>
 
@@ -19,29 +20,19 @@
           <a href="#" class="text-white">Home</a>
         </li>
 
-        <li
-          class=" hover:bg-blue-900 transition ease-in-out  hover:-translate-y-1 hover:scale-110 p-8 w-full flex justify-center ">
-          <a href="#" class="text-white">View</a>
-        </li>
-
-        <li
+        <li onclick="changeContent('extracts.html')"
           class=" hover:bg-blue-900 transition ease-in-out  hover:-translate-y-1 hover:scale-110 p-8 w-full flex justify-center ">
           <a href="#" class="text-white">Extracts</a>
         </li>
 
-        <li 
+        <li onclick="changeContent('classification.html')"
           class=" hover:bg-blue-900 transition ease-in-out  hover:-translate-y-1 hover:scale-110 p-8 w-full flex justify-center ">
           <a href="#" class="text-white">Classification</a>
         </li>
 
-        <li
+        <li onclick="changeContent('graphs.html')"
           class=" hover:bg-blue-900 transition ease-in-out  hover:-translate-y-1 hover:scale-110 p-8 w-full flex justify-center ">
-          <a href="#" class="text-white">Converter</a>
-        </li>
-
-        <li
-          class=" hover:bg-blue-900 transition ease-in-out  hover:-translate-y-1 hover:scale-110 p-8 w-full flex justify-center ">
-          <a href="#" class="text-white">Visuals</a>
+          <a href="#" class="text-white">Graphs</a>
         </li>
 
         <li onclick="changeContent('about.html')"
@@ -57,4 +48,232 @@
   </div>
   </div>
 </body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Page Title</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        background-color: #47ac3e;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+
+      nav {
+        background-color: #f2f2f2;
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        top: 60px;
+        z-index: 1000;
+        margin-top: 30px;
+      }
+
+      nav a {
+        float: left;
+        display: block;
+        color: #333;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+
+      nav a:hover {
+        background-color: #ddd;
+        color: rgb(0, 0, 0);
+      }
+
+      iframe {
+        width: 100%;
+        height: 500px;
+        border: none;
+      }
+
+      form {
+        padding: 20px;
+      }
+
+      input {
+        padding: 10px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      button {
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .content {
+        margin-top: 120px; /* Adjusted to account for the fixed header and nav */
+        transition: margin-top 0.5s; /* Add transition for smooth effect */
+      }
+    </style>
+
+    <script>
+     async function uploadAndGetData() {
+  const form = document.getElementById("fileUploadForm");
+  const formData = new FormData(form);
+
+  try {
+    const request = await fetch("http://localhost:5173/upload", {
+      method: "POST",
+      body: formData,
+    });
+    const message = await request.text();
+    console.log(message);
+  } catch (err) {
+    console.error(err);
+  }
+
+  try {
+    const response = await fetch("http://localhost:5173/getData");
+    const data = await response.json();
+
+    // Convert the Buffer data to a string using TextDecoder
+    const textDecoder = new TextDecoder("utf-8");
+    const decodedData = textDecoder.decode(
+      new Uint8Array(data.output.data)
+    );
+    
+    const dataContainer = document.getElementById("dataContainer");
+    dataContainer.innerHTML = `<pre>${decodedData}</pre>`;
+
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+      async function resetForm() {
+        const fileInput =
+          document.getElementById("fileUploadForm").elements.csvFile;
+        const fullPath = fileInput.value;
+        const fileName = fullPath.split("\\").pop();
+        const form = document.getElementById("fileUploadForm");
+        form.reset();
+        document.getElementById("dataContainer").innerHTML="No csv file uploaded";
+        try {
+          const response = await fetch(
+            `http://localhost:5173/reset/${encodeURIComponent(fileName)}`
+          );
+
+          if (!response.ok) {
+            console.error(`Error resetting file: ${response.statusText}`);
+            return;
+          }
+
+          const reply = await response.text();
+          console.log(reply);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+
+      window.addEventListener("beforeunload", resetForm);
+
+      // Adjust margin-top dynamically when scrolling
+      window.addEventListener("scroll", function () {
+        const headerHeight = document.querySelector("header").offsetHeight;
+        const navHeight = document.querySelector("nav").offsetHeight;
+        const content = document.querySelector(".content");
+        content.style.marginTop = headerHeight + navHeight + "px";
+      });
+    </script>
+  </head>
+  <body>
+    <div>
+      <header>
+        <h1>Xtract</h1>
+      </header>
+    </div>
+
+    <div>
+      <nav style="display: flex; justify-content: space-around">
+        <a href="#home">Home</a>
+        <a href="#extracts">Extracts</a>
+        <a href="#graphs">Graphs</a>
+        <a href="#classifier">Classifier</a>
+        <a href="#about">About us</a>
+      </nav>
+    </div>
+
+    <div id="home" class="content">
+      <br />
+      <h2>Home</h2>
+      <form id="fileUploadForm" enctype="multipart/form-data">
+        <label id="fileContainer" for="fileInput">
+          <span id="customButtonText">Choose File</span>
+          <input
+            type="file"
+            id="fileInput"
+            name="csvFile"
+            accept=".csv"
+            class="file-input hidden"
+          />
+        </label>
+        <button type="button" onclick="uploadAndGetData()">Extract</button>
+        <button type="button" onclick="resetForm()">Reset</button>
+      </form>
+    </div>
+
+    <div id="extracts" class="content">
+      <h2>Extracts</h2>
+      <div id="dataContainer">No csv file uploaded</div>
+    </div>
+
+    <div id="graphs" class="content">
+      <h2>Graphs</h2>
+      <form id="graph-form">
+        <label for="graphOptions">Select the type of graph:</label>
+        <select id="graphOptions" name="graphOptions">
+          <option value="option2">Bar Graph</option>
+          <option value="option3">Histogram</option>
+          <option value="option1">Pie Chart</option>
+          <option value="option3">Line Graph</option>
+          <option value="option3">Scatter Plot</option>
+          <option value="option3">Dot Plot</option>
+        </select>
+      </form>
+      <iframe id="graphs" src="graphs.html"></iframe>`
+      <div
+        id="graphsContainer"
+        style="display: flex; justify-content: space-around"
+      ></div>
+    </div>
+
+    <div id="classifier" class="content">
+      <h2>Classifier</h2>
+      <p>Probability ( <input type="text" /> | <input type="text" /> )</p>
+    </div>
+
+    <div id="about" class="content">
+      <h2>About Us</h2>
+    </div>
+  </body>
 </html>

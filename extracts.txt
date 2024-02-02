@@ -1,0 +1,196 @@
+--------------------FOR THE COLUMN 'age'--------------------
+
+
+Mean for 'age': 54.4695945945946
+Mode for 'age': 58.0
+Median for 'age': 56.0
+Minimum for 'age': 29.0
+Maximum for 'age': 77.0
+Q1 for 'age': nan
+Q3 for 'age': nan
+Mean for 'age': 54.4695945945946
+Sum of Squared Errors for 'age': 434479.0743243243
+Skewness for 'age': -0.1980384850401438
+Kurtosis for 'age': -0.553428571229353
+Population Standard Deviation for 'age': 9.031150587379077
+Population Variance for 'age': 81.56168093191746
+
+
+
+--------------------FOR THE COLUMN 'gender'--------------------
+
+
+Mean for 'gender': 0.6879194630872483
+Mode for 'gender': 1.0
+Median for 'gender': 1.0
+Minimum for 'gender': 0.0
+Maximum for 'gender': 1.0
+Q1 for 'gender': nan
+Q3 for 'gender': nan
+Mean for 'gender': 0.6879194630872483
+Sum of Squared Errors for 'gender': 1151.5771812080538
+Skewness for 'gender': -0.8113740082359361
+Kurtosis for 'gender': -1.3421727951253195
+Population Standard Deviation for 'gender': 0.4633856993878596
+Population Variance for 'gender': 0.2147263063971758
+
+
+
+--------------------FOR THE COLUMN 'CPT'--------------------
+
+
+Mean for 'CPT': 0.9633333333333334
+Mode for 'CPT': 0.0
+Median for 'CPT': 1.0
+Minimum for 'CPT': 0.0
+Maximum for 'CPT': 3.0
+Q1 for 'CPT': nan
+Q3 for 'CPT': nan
+Mean for 'CPT': 0.9633333333333334
+Sum of Squared Errors for 'CPT': 5770.74
+Skewness for 'CPT': 0.4897888744777153
+Kurtosis for 'CPT': -1.1955560172494175
+Population Standard Deviation for 'CPT': 1.0338537088908148
+Population Variance for 'CPT': 1.0688534913872938
+
+
+
+--------------------FOR THE COLUMN 'RBP'--------------------
+
+
+Mean for 'RBP': 131.93898305084747
+Mode for 'RBP': 120.0
+Median for 'RBP': 130.0
+Minimum for 'RBP': 94.0
+Maximum for 'RBP': 200.0
+Q1 for 'RBP': nan
+Q3 for 'RBP': nan
+Mean for 'RBP': 131.93898305084747
+Sum of Squared Errors for 'RBP': 1623652.2305084746
+Skewness for 'RBP': 0.7094870279907076
+Kurtosis for 'RBP': 0.9138640999874714
+Population Standard Deviation for 'RBP': 17.48799997852562
+Population Variance for 'RBP': 305.8301432489122
+
+
+
+--------------------FOR THE COLUMN 'cholesterol'--------------------
+
+
+Mean for 'cholesterol': 246.28040540540542
+Mode for 'cholesterol': 197.0
+Median for 'cholesterol': 240.5
+Minimum for 'cholesterol': 126.0
+Maximum for 'cholesterol': 564.0
+Q1 for 'cholesterol': nan
+Q3 for 'cholesterol': nan
+Mean for 'cholesterol': 246.28040540540542
+Sum of Squared Errors for 'cholesterol': 14325763.074324325
+Skewness for 'cholesterol': 1.1545562995884169
+Kurtosis for 'cholesterol': 4.502999703131335
+Population Standard Deviation for 'cholesterol': 51.85821139816716
+Population Variance for 'cholesterol': 2689.274089416994
+
+
+
+--------------------FOR THE COLUMN 'FBST'--------------------
+
+
+Mean for 'FBST': 0.14950166112956811
+Mode for 'FBST': 0.0
+Median for 'FBST': 0.0
+Minimum for 'FBST': 0.0
+Maximum for 'FBST': 1.0
+Q1 for 'FBST': nan
+Q3 for 'FBST': nan
+Mean for 'FBST': 0.14950166112956811
+Sum of Squared Errors for 'FBST': 688.9036544850499
+Skewness for 'FBST': 1.966420885404297
+Kurtosis for 'FBST': 1.8675003312047895
+Population Standard Deviation for 'FBST': 0.3566151805792586
+Population Variance for 'FBST': 0.12717438701957723
+
+
+
+--------------------FOR THE COLUMN 'RECG'--------------------
+
+
+Mean for 'RECG': 0.5268456375838926
+Mode for 'RECG': 1.0
+Median for 'RECG': 1.0
+Minimum for 'RECG': 0.0
+Maximum for 'RECG': 2.0
+Q1 for 'RECG': nan
+Q3 for 'RECG': nan
+Mean for 'RECG': 0.5268456375838926
+Sum of Squared Errors for 'RECG': 1481.1342281879192
+Skewness for 'RECG': 0.17043206287344723
+Kurtosis for 'RECG': -1.3506570060101113
+Population Standard Deviation for 'RECG': 0.5255249150687278
+Population Variance for 'RECG': 0.2761764363579935
+
+
+
+--------------------FOR THE COLUMN 'MHRA'--------------------
+
+
+Mean for 'MHRA': 149.61148648648648
+Mode for 'MHRA': 162.0
+Median for 'MHRA': 152.0
+Minimum for 'MHRA': 71.0
+Maximum for 'MHRA': 202.0
+Q1 for 'MHRA': nan
+Q3 for 'MHRA': nan
+Mean for 'MHRA': 149.61148648648648
+Sum of Squared Errors for 'MHRA': 2801561.7770270268
+Skewness for 'MHRA': -0.5328863637992459
+Kurtosis for 'MHRA': -0.06925610612435218
+Population Standard Deviation for 'MHRA': 22.932888175230698
+Population Variance for 'MHRA': 525.917360057636
+
+
+
+--------------------FOR THE COLUMN 'EIA'--------------------
+
+
+Unable to calculate statistics for 'EIA'. Contains non-numeric values.
+
+
+--------------------FOR THE COLUMN 'PreviousPeak'--------------------
+
+
+Mean for 'PreviousPeak': 1.0411960132890365
+Mode for 'PreviousPeak': 0.0
+Median for 'PreviousPeak': 0.8
+Minimum for 'PreviousPeak': 0.0
+Maximum for 'PreviousPeak': 6.2
+Q1 for 'PreviousPeak': nan
+Q3 for 'PreviousPeak': nan
+Mean for 'PreviousPeak': 1.0411960132890365
+Sum of Squared Errors for 'PreviousPeak': 7303.125049833888
+Skewness for 'PreviousPeak': 1.2639994238538748
+Kurtosis for 'PreviousPeak': 1.5245579198409898
+Population Standard Deviation for 'PreviousPeak': 1.1611142384193396
+Population Variance for 'PreviousPeak': 1.3481862746601232
+
+
+
+--------------------FOR THE COLUMN 'output'--------------------
+
+
+Mean for 'output': 0.5445544554455446
+Mode for 'output': 1.0
+Median for 'output': 1.0
+Minimum for 'output': 0.0
+Maximum for 'output': 1.0
+Q1 for 'output': 0.0
+Q3 for 'output': 1.0
+Mean for 'output': 0.5445544554455446
+Sum of Squared Errors for 'output': 1352.6732673267327
+Skewness for 'output': -0.17897885167735306
+Kurtosis for 'output': -1.968688629886905
+Population Standard Deviation for 'output': 0.49805660600480284
+Population Variance for 'output': 0.2480603827850234
+
+
+
