@@ -7,6 +7,64 @@
     padding: 0;
 }
 
+body {
+    height: 100vh;
+    width: 80vw;
+}
+
+.upper {
+    height: 60%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-box {
+    background-color: #f0f0f0;
+    border: 7px solid #0070f3;
+    border-radius: 15px;
+    height: 75%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-text {
+    font-family: sans-serif;
+    font-size: 16px;
+    color: #666;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+.custom-form {
+    height: 40%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.custom-button {
+    cursor: pointer;
+    background-color: #0070f3;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    min-width: 10%;
+    transition: all 0.3s ease-in-out;
+}
+
+.custom-button:hover {
+    transform: translateY(-1px);
+    scale:1.1;
+    background-color: #900;
+}
+
 
 
 
