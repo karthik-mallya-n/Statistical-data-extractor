@@ -13,7 +13,13 @@
   <body>
     <div
       class="containing"
-      style="min-width: 100vw; min-height: 100vh; height: auto; width: auto"
+      style="
+        margin-bottom: 80px;
+        min-width: 100vw;
+        min-height: 100vh;
+        height: auto;
+        width: auto;
+      "
     >
       <div
         class="head"
@@ -64,7 +70,7 @@
           <li
             class="hover:bg-blue-900 transition ease-in-out hover:-translate-y-1 hover:scale-110 p-8 w-full flex justify-center"
           >
-            <a href="#classifier" class="text-white">Classification</a>
+            <a href="#converter" class="text-white">File Converter</a>
           </li>
 
           <li
@@ -220,23 +226,25 @@
               border-radius: 15px;
               display: flex;
               justify-content: center;
+              flex-direction: column;
               align-items: center;
             "
           >
             <div id="selectGraph"></div>
-            <div>
-              <div id="attributeContainer">No csv file uploaded</div>
-            </div>
+            <div id="defaultMessage">No csv file uploaded</div>
+            <div
+              id="graphContainer"
+              style="
+                display: flex;
+                justify-content: space-around;
+                padding: 20px;
+              "
+            ></div>
           </div>
-
-          <div
-            id="graphContainer"
-            style="display: flex; justify-content: space-around; padding: 20px"
-          ></div>
         </div>
 
         <div
-          id="classifier"
+          id="converter"
           class="content"
           style="
             height: auto;
@@ -256,7 +264,7 @@
             class="homehead flex justify-center items-center"
           >
             <h1 style="font-size: x-large; font-weight: 400; color: azure">
-              Classifiers
+              File Converter
             </h1>
           </div>
           <div
@@ -270,7 +278,7 @@
               align-items: center;
             "
           >
-            <p>Probability ( <input type="text" /> | <input type="text" /> )</p>
+            <p>Under development</p>
           </div>
         </div>
         <div
@@ -306,10 +314,11 @@
               display: flex;
               justify-content: center;
               align-items: center;
+              padding: 50px;
             "
           >
-            <p>
-              "Serial Byte" is an innovative data analysis platform that delves
+            <q>
+              Serial Byte" is an innovative data analysis platform that delves
               into the intricacies of information, unraveling the complexities
               hidden within data. Our platform is designed to uncover the
               concealed connections and guide users through the narrative that
@@ -318,7 +327,7 @@
               users to make informed decisions. Dive into the depth of
               information with Serial Byte and embark on a journey of
               exploration, discovery, and understanding in the world of data.
-            </p>
+            </q>
           </div>
         </div>
       </div>

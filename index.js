@@ -129,17 +129,6 @@ app.get("/getData", (req, res) => {
     res.json({
       output: pyData,
     });
-    //  fs.writeFile(
-    //    "extracts.html",
-    //    `<pre style="margin-left :30px;">` + pyData + `</pre>`,
-    //    (err) => {
-    //      if (err) {
-    //        console.error(`Error writing file: ${err}`);
-    //      } else {
-    //        console.log("File written successfully.");
-    //      }
-    //    }
-    //  );
   });
 });
 
@@ -159,9 +148,6 @@ app.post("/getGraph", (req, res) => {
 app.get("/getColumns", (req, res) => {
   const args = [];
   runPythonScript("columns.py", args, (pyData) => {
-    //    res.json({
-    //      columns: pyData,
-    //    });
     res.send(pyData);
   });
 });
