@@ -38,11 +38,16 @@ def calculate_maximum(data, column_name):
 
 # Function to calculate quartiles
 def calculate_quartiles(data, column_name):
-    q1 = np.percentile(data, 25, method='midpoint')
-    q3 = np.percentile(data, 75, method='midpoint')
-    print(f"Q1 for '{column_name}': {q1}")
-    print(f"Q3 for '{column_name}': {q3}")
-    return q1, q3
+    try:
+        column_data = pd.to_numeric(data, errors='coerce').dropna()
+        q1 = np.percentile(column_data, 25, method='midpoint')
+        q3 = np.percentile(column_data, 75, method='midpoint')
+        print(f"Q1 for '{column_name}': {q1}")
+        print(f"Q3 for '{column_name}': {q3}")
+        return q1, q3
+    except ValueError:
+        print(f"Unable to calculate quartiles for '{column_name}'. Contains non-numeric values.")
+        return None, None
 
 # Function to calculate sum of squared errors
 def calculate_sse(data, column_name):
@@ -75,57 +80,6 @@ def calculate_population_variance(data, column_name):
     print(f"Population Variance for '{column_name}': {variance_value}")
     return variance_value
 
-# Function to generate line plot and save as PNG
-def generate_scatter_plot(data, column_x, column_y, save_location):
-    plt.scatter(data[column_x], data[column_y])
-    plt.title(f"Scatter Plot for '{column_x}' vs '{column_y}'")
-    plt.xlabel(column_x)
-    plt.ylabel(column_y)
-    plt.savefig(f"{save_location}/scatter_plot.png")
-    plt.show()
-
-# Function to generate line plot and save as PNG
-def generate_line_plot(data, column_x, column_y, save_location):
-    plt.plot(data[column_x], data[column_y])
-    plt.title(f"Line Plot for '{column_x}' vs '{column_y}'")
-    plt.xlabel(column_x)
-    plt.ylabel(column_y)
-    plt.savefig(f"{save_location}/line_plot.png")
-    plt.show()
-
-# Function to generate bar plot and save as PNG
-def generate_bar_plot(data, column_x, column_y, save_location):
-    plt.bar(data[column_x], data[column_y])
-    plt.title(f"Bar Plot for '{column_x}' vs '{column_y}'")
-    plt.xlabel(column_x)
-    plt.ylabel(column_y)
-    plt.savefig(f"{save_location}/bar_plot.png")
-    plt.show()
-
-# Function to generate box plot and save as PNG
-def generate_box_plot(data, column_x, column_y, save_location):
-    plt.boxplot([data[data[column_x] == category][column_y] for category in data[column_x]], vert=False)
-    plt.title(f"Box Plot for '{column_y}' grouped by '{column_x}'")
-    plt.xlabel(column_y)
-    plt.savefig(f"{save_location}/box_plot.png")
-    plt.show()
-# Function to generate histogram and save as PNG
-def generate_histogram(data, column_name, save_location):
-    plt.hist(data, bins=20, edgecolor='black')
-    plt.title(f"Histogram for '{column_name}'")
-    plt.xlabel("Value")
-    plt.ylabel("Frequency")
-    plt.show()
-    
-    
-    #Piechart
-def generate_pie_chart(data, column_name, save_location):
-    counts = data[column_name].value_counts()
-    plt.pie(counts, labels=counts.index, autopct='%1.1f%%', startangle=140)
-    plt.title(f"Pie Chart for '{column_name}'")
-    plt.savefig(f"{save_location}/pie_chart_{column_name}.png")
-    plt.show()
-
 
 # Function to print statistics for a column
 def print_column_statistics(df, column_name):
@@ -141,24 +95,8 @@ def print_column_statistics(df, column_name):
         calculate_sse(column_data, column_name)
         calculate_skewness(column_data, column_name)
         calculate_kurtosis(column_data, column_name)
-        #calculate_sample_std_dev(column_data, column_name)
         calculate_population_std_dev(column_data, column_name)
-        #calculate_sample_variance(column_data, column_name)
         calculate_population_variance(column_data, column_name)
-
-        save_location = "graphs"
-
-        #generate_scatter_plot(df, x_column, y_column, save_location)
-#
-        #generate_line_plot(df, x_column, y_column, save_location)
-#
-        #generate_bar_plot(df, x_column, y_column, save_location)
-#
-        #generate_box_plot(df, x_column, y_column, save_location)
-#
-        #generate_histogram(df[y_column], y_column, save_location)
-    #
-        #generate_pie_chart(df, x_column, save_location)
 
         print(f"\n\n")
         
