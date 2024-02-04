@@ -84,7 +84,7 @@ def calculate_population_variance(data, column_name):
 # Function to print statistics for a column
 def print_column_statistics(df, column_name):
     try:
-        print(f"--------------------FOR THE COLUMN '{column_name}'--------------------\n\n")
+        print(f"--------------------'{column_name}'--------------------\n\n")
         column_data = df[column_name].astype(float)
         calculate_mean(column_data, column_name)
         calculate_mode(column_data, column_name)
