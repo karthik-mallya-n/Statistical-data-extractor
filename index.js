@@ -44,7 +44,7 @@ app.post("/upload", upload.single("csvFile"), (req, res) => {
 });
 //-----------------------reset endpoint--------------------------------------
 app.get("/reset/:uploadedFile", (req, res) => {
-  //
+  //to delete uploaded file
   const fileName = req.params.uploadedFile;
   const filePath = path.join("./uploads", fileName);
 
@@ -57,6 +57,7 @@ app.get("/reset/:uploadedFile", (req, res) => {
     res.status(404).send("File not found");
   }
 
+  //to delete generated graphs
   const directoryPath = path.join(__dirname, "graphs");
 
   if (fs.existsSync(directoryPath)) {
@@ -66,18 +67,20 @@ app.get("/reset/:uploadedFile", (req, res) => {
         return;
       }
 
-      files.forEach((file) => {
-        const filePath = path.join(directoryPath, file);
-
-        // Deletings the file
+      for (let i = 0; i < files.length; i++) {
+        const filePath = path.join(directoryPath, files[i]);
+        if (files[i] == ".gitkeep") {
+          continue;
+        }
+        // Deleting the file
         fs.unlink(filePath, (err) => {
           if (err) {
-            console.error(`Error deleting file ${file}: ${err}`);
+            console.error(`Error deleting file ${files[i]}: ${err}`);
           } else {
-            console.log(`File ${file} deleted successfully`);
+            console.log(`File ${files[i]} deleted successfully`);
           }
         });
-      });
+      }
     });
   } else {
     console.error("Directory not found: graphs");
@@ -104,7 +107,8 @@ function runPythonScript(file, args, callback) {
 
   pythonProcess.stdout.on("data", (data) => {
     pyData = data;
-    console.log(`Python script output: ${pyData}`);
+    //if you want to check the output in the logs
+    //console.log(`Python script output: ${pyData}`);
   });
 
   pythonProcess.stderr.on("data", (data) => {

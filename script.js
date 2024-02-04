@@ -237,7 +237,9 @@ async function resetForm() {
   const form = document.getElementById("fileUploadForm");
   form.reset();
   document.getElementById("dataContainer").innerHTML = "No csv file uploaded";
-  document.getElementById("graphContainer").innerHTML = "No csv file uploaded";
+  document.getElementById("graphContainer").innerHTML = "";
+  document.getElementById("attributeContainer").innerHTML = "No csv file uploaded";
+
   try {
     const response = await fetch(
       `http://localhost:5173/reset/${encodeURIComponent(fileName)}`
