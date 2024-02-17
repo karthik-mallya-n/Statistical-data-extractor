@@ -138,9 +138,9 @@
                 type="button"
                 class="transition ease-in-out cursor-pointer bg-blue-900 hover:-translate-y-1 hover:scale-110 hover:bg-purple-900 duration-300 text-white font-bold rounded-md flex justify-center items-center"
                 style="padding: 16px 40px"
-                onclick="uploadAndGetData()"
+                onclick="read()"
               >
-                Extract
+                Read
               </button>
               <button
                 type="button"
@@ -177,6 +177,7 @@
               Extracts
             </h1>
           </div>
+
           <div
             id="dataContainer"
             style="
@@ -185,11 +186,20 @@
               min-height: 7vh;
               border-radius: 15px;
               display: flex;
-              justify-content: center;
+              flex-direction: column;
+              /* justify-content: center; */
               align-items: center;
             "
           >
-            No csv file uploaded
+            <div
+              id="extractAttributeContainer"
+              style="display: flex; justify-content: center"
+            >
+              No csv file uploaded
+            </div>
+            <div id="insights">
+
+            </div>
           </div>
         </div>
         <div

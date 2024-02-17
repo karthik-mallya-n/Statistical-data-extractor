@@ -124,7 +124,8 @@ function runPythonScript(file, args, callback) {
 }
 //--------------------setting up get endpoint for retrieving the statistical data from the python script
 app.get("/getData", (req, res) => {
-  const args = [];
+  const attribute = req.query.attribute;
+  const args = [attribute];
   runPythonScript("analysis.py", args, (pyData) => {
     res.json({
       output: pyData,

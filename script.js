@@ -88,9 +88,7 @@
 //         </div>`;
 //     }
 //
-async function getData() {}
-
-async function uploadAndGetData() {
+async function read() {
   const form = document.getElementById("fileUploadForm");
   const formData = new FormData(form);
 
@@ -105,21 +103,88 @@ async function uploadAndGetData() {
     console.error(err);
   }
 
+  //getting the column names
+  const optionResponse = await fetch("http://localhost:5173/getColumns");
+  let options = await optionResponse.text();
+  options = options.split(/\r?\n/).filter((value) => value.trim() !== "");
+
+  //inserting the select box
+  const extractAttributeContainer = document.getElementById(
+    "extractAttributeContainer"
+  );
+  extractAttributeContainer.innerHTML = ``;
+  const extractAttributeSelect = document.createElement("select");
+  extractAttributeSelect.setAttribute("id", "extractAttribute");
+  extractAttributeSelect.setAttribute("style", `margin: 10px`);
+  extractAttributeSelect.setAttribute("onchange", `getData()`);
+  extractAttributeContainer.appendChild(extractAttributeSelect);
+
+  //options under the select element
+  for (let i = 0; i < options.length; i++) {
+    const option = document.createElement("option");
+    option.setAttribute("value", `${option[i + 1]}`);
+    option.innerHTML = options[i];
+    extractAttributeSelect.appendChild(option);
+  }
+  const allElementsOption = document.createElement("option");
+  allElementsOption.setAttribute("value", `${options[options.length]}`);
+  allElementsOption.innerHTML=`All Attributes`
+  extractAttributeSelect.appendChild(allElementsOption)
+
+
+  // const extractButton = document.createElement("button");
+  // extractButton.setAttribute("id", "extract");
+  // extractButton.setAttribute(
+  //   "style",
+  //   "padding:16px 40px; margin: 7px 0px -29px 13px"
+  // );
+  // extractButton.setAttribute(
+  //   "class",
+  //   "transition ease-in-out cursor-pointer bg-blue-900 hover:-translate-y-1 hover:scale-110 hover:bg-purple-900 duration-300 text-white font-bold rounded-md"
+  // );
+  // extractButton.setAttribute("type", "button");
+  // extractButton.setAttribute("onclick", "getData()");
+  // extractButton.innerHTML = `Extract`;
+  // extractAttributeContainer.appendChild(extractButton);
+}
+
+async function getData() {
+  // const form = document.getElementById("fileUploadForm");
+  // const formData = new FormData(form);
+
+  // try {
+  //   const request = await fetch("http://localhost:5173/upload", {
+  //     method: "POST",
+  //     body: formData,
+  //   });
+  //   const message = await request.text();
+  //   console.log(message);
+  // } catch (err) {
+  //   console.error(err);
+  // }
+
   try {
-    const response = await fetch("http://localhost:5173/getData");
+    const extractAttribute = document.getElementById("extractAttribute");
+    const extractAttributeName =
+      extractAttribute.options[extractAttribute.selectedIndex].text;
+    console.log(extractAttributeName);
+
+    const url = new URL("http://localhost:5173/getData");
+    url.searchParams.append("attribute", extractAttributeName);
+
+    const response = await fetch(url);
     const data = await response.json();
 
     // Convert the Buffer data to a string using TextDecoder
     const textDecoder = new TextDecoder("utf-8");
     const decodedData = textDecoder.decode(new Uint8Array(data.output.data));
 
-    const dataContainer = document.getElementById("dataContainer");
-    dataContainer.innerHTML = `<pre>${decodedData}</pre>`;
+    const insights = document.getElementById("insights");
+    insights.innerHTML = `<pre style="padding-top:50px">${decodedData}</pre>`;
 
     //add content to graph section
     const selectGraph = document.getElementById("selectGraph");
-    selectGraph.innerHTML = 
-    `<div>
+    selectGraph.innerHTML = `<div>
         <form style="display:flex; justify-content:center;" id="graphSelect">
           <div style = "margin-top: 12px; display:flex; justify-content: center">
             <div style = "margin-top:10px;">
@@ -142,7 +207,10 @@ async function uploadAndGetData() {
             <div id="attributeContainer"></div>
           </div>
           <div>
-            <button style = "padding:16px 40px; margin: 7px 0px -29px 13px" class = "transition ease-in-out cursor-pointer bg-blue-900 hover:-translate-y-1 hover:scale-110 hover:bg-purple-900 duration-300 text-white font-bold rounded-md" type="button" onclick="generateGraph()">
+            <button style = "padding:16px 40px; margin: 7px 0px -29px 13px" 
+                    class = "transition ease-in-out cursor-pointer bg-blue-900 hover:-translate-y-1 hover:scale-110 hover:bg-purple-900 duration-300 text-white font-bold rounded-md" 
+                    type="button" 
+                    onclick="generateGraph()">
               Generate
             </button>
           </div>
@@ -279,7 +347,7 @@ async function generateGraph() {
   url.searchParams.append("graph", graphName);
 
   let responseText;
-  console.log(url)
+  console.log(url);
   // fetching path
   try {
     const response = await fetch(url.toString(), {
