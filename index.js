@@ -31,10 +31,64 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+//------------------------resetting middleware----------------------------
+
+function totalReset(req, res, next) {
+  //to delete uploaded file
+  const fileDirectoryPath = path.join(__dirname, "uploads");
+
+  fs.readdir(fileDirectoryPath, (err, files) => {
+    if (err) {
+      console.error(`Error reading directory: ${err}`);
+      return;
+    }
+
+    for (let i = 0; i < files.length; i++) {
+      const filePath = path.join(fileDirectoryPath, files[i]);
+      if (files[i] == ".gitkeep") {
+        continue;
+      }
+      // Deleting the file
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.error(`Error deleting file ${files[i]}: ${err}`);
+        } else {
+          console.log(`File ${files[i]} deleted successfully`);
+        }
+      });
+    }
+  });
+
+  //to delete generated graphs
+  const graphDirectoryPath = path.join(__dirname, "graphs");
+
+  fs.readdir(graphDirectoryPath, (err, files) => {
+    if (err) {
+      console.error(`Error reading directory: ${err}`);
+      return;
+    }
+
+    for (let i = 0; i < files.length; i++) {
+      const filePath = path.join(graphDirectoryPath, files[i]);
+      if (files[i] == ".gitkeep") {
+        continue;
+      }
+      // Deleting the file
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.error(`Error deleting file ${files[i]}: ${err}`);
+        } else {
+          console.log(`File ${files[i]} deleted successfully`);
+        }
+      });
+    }
+  });
+  next();
+}
 
 //------------------------setting up endpoints-----------------------------
 
-app.get("/xtract", (req, res) => {
+app.get("/xtract", totalReset, (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
@@ -42,61 +96,8 @@ app.post("/upload", upload.single("csvFile"), (req, res) => {
   console.log("file uploaded successfullly!");
   res.send("File uploaded successfully!");
 });
-//-----------------------reset endpoint--------------------------------------
-app.get("/reset/:uploadedFile", (req, res) => {
-  //to delete uploaded file
-  const fileName = req.params.uploadedFile;
-  const filePath = path.join("./uploads", fileName);
 
-  if (fs.existsSync(filePath)) {
-    fs.unlinkSync(filePath);
-    console.log(`File ${fileName} removed successfully`);
-    res.send("File removed successfully!");
-  } else {
-    console.log(`File ${fileName} not found`);
-    res.status(404).send("File not found");
-  }
-
-  //to delete generated graphs
-  const directoryPath = path.join(__dirname, "graphs");
-
-  if (fs.existsSync(directoryPath)) {
-    fs.readdir(directoryPath, (err, files) => {
-      if (err) {
-        console.error(`Error reading directory: ${err}`);
-        return;
-      }
-
-      for (let i = 0; i < files.length; i++) {
-        const filePath = path.join(directoryPath, files[i]);
-        if (files[i] == ".gitkeep") {
-          continue;
-        }
-        // Deleting the file
-        fs.unlink(filePath, (err) => {
-          if (err) {
-            console.error(`Error deleting file ${files[i]}: ${err}`);
-          } else {
-            console.log(`File ${files[i]} deleted successfully`);
-          }
-        });
-      }
-    });
-  } else {
-    console.error("Directory not found: graphs");
-  }
-  //    fs.writeFile(
-  //      "extracts.html",
-  //      "<center>no valid input available</center>",
-  //      (err) => {
-  //        if (err) {
-  //          console.error(`Error writing file: ${err}`);
-  //        } else {
-  //          return;
-  //        }
-  //      }
-  //    );
-});
+app.get("/reset", totalReset);
 
 //------------------------PYTHON SCRIPT ------------------------
 
