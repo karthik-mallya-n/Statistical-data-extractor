@@ -4,6 +4,7 @@ from scipy.stats import chi2_contingency,mode, skew, kurtosis,norm, expon, unifo
 import matplotlib.pyplot as plt
 import os
 import pandas as pd
+import sys
 
 
 # Function to calculate mean
@@ -84,7 +85,6 @@ def calculate_population_variance(data, column_name):
 # Function to print statistics for a column
 def print_column_statistics(df, column_name):
     try:
-        print(f"--------------------FOR THE COLUMN '{column_name}'--------------------\n\n")
         column_data = df[column_name].astype(float)
         calculate_mean(column_data, column_name)
         calculate_mode(column_data, column_name)
@@ -99,8 +99,6 @@ def print_column_statistics(df, column_name):
         calculate_population_variance(column_data, column_name)
 
         print(f"\n\n")
-        
-
     except ValueError:
         print(f"Unable to calculate statistics for '{column_name}'. Contains non-numeric values.\n\n")
 
@@ -119,10 +117,13 @@ def main():
         if os.path.isfile(csv_file_path):
             df = pd.read_csv(csv_file_path)
 
-    #-----------------------------------------iterates though every column in the dataset------------------------
-            for column_name in df.columns:
-                print_column_statistics(df, column_name)
-                #print(f"Processing column '{column}' in file '{csv_file}'")
+            #retrieving the requested column
+            attribute = sys.argv[1]
+            if (attribute != "All Attributes"):
+                print_column_statistics(df, attribute)
+            else:
+                for column_name in df.columns:
+                        print_column_statistics(df, column_name)
         else:
             print(f"Invalid file format. File '{csv_file}' is not a CSV file.")
     else:
